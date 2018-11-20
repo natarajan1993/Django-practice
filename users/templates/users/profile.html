@@ -9,7 +9,17 @@
 			<p class="text-secondary">{{ user.email }}</p>
 		</div>
 	</div>
-		<!-- FORM HERE -->
+		<form method="POST" enctype = "multipart/form-data"> <!-- This HAS to be added. Without specifying the enctype then the pictures wont be saved -->
+			{% csrf_token %} <!-- Cross site request forgery token. Gives more security and prevents things like SQL injections -->
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4">Profile Info</legend>
+				{{ u_form|crispy }} <!-- makes the form look a lot better -->
+				{{ p_form|crispy }} <!-- makes the form look a lot better -->
+			</fieldset>
+			<div class="form-group">
+				<button class="btn btn-outline-info" type="submit">Update</button>
+			</div>
+		</form>
 </div>
 
 {% endblock content %}
