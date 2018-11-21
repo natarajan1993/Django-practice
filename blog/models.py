@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 from django.utils import timezone
 
 class Post(models.Model):
@@ -10,3 +11,6 @@ class Post(models.Model):
     
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self): # Re-route the user to the post that was just created after they create the post
+    	return reverse('post-detail', kwargs = {'pk':self.pk})
